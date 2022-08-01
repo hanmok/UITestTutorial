@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var loadingActivity: UIActivityIndicatorView!
     @IBOutlet weak var statusLabel: UILabel!
+    
     let expectedUserName = "CodePro"
     let expectedPassword = "abc123"
     
@@ -31,7 +32,7 @@ class LoginViewController: UIViewController {
         
         statusLabel.text = "Logging In"
         
-        loadingActivity.startAnimating()
+//        loadingActivity.startAnimating()
         
         guard let userName = userName.text, !userName.isEmpty,
             let password = password.text, !password.isEmpty else {
@@ -59,6 +60,10 @@ class LoginViewController: UIViewController {
     }
     
     private func presentAlert(with title: String, message: String) {
+        
+//        loadingActivity.startAnimating()
+        loadingActivity.stopAnimating()
+        
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
  
         alertVC.addAction(.init(title: "Ok", style: .default, handler: nil))
