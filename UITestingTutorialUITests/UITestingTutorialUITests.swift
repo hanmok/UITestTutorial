@@ -35,59 +35,59 @@ class UITestingTutorialUITests: XCTestCase {
     
     func testInvalidLogin_progressSpinnerIsHidden() {
         
-//        let validPassword = "invalidPassword"
-//        let validUserName = "CodePro"
-        
-        
         let app = XCUIApplication()
         app.launch()
         
         app.navigationBars["Mockify Music"].buttons["Profile"].tap()
         app.buttons["Login"].tap()
-        app.buttons["Login"].tap() // 하나만 쓰면 이상하게 버그남;;
+        app.buttons["Login"].tap() // 하나만 쓰면 이상하게 버그남..
 //        app.alerts["Missing Credentials"].scrollViews.otherElements.buttons["Ok"].tap()
         let alertDialog = app.alerts["Missing Credentials"]
-//        XCTAssertTrue(alertDialog.exists)
+        XCTAssertTrue(alertDialog.exists)
 //        alertDialog.buttons["Ok"].tap()
         XCTAssertTrue(alertDialog.buttons["Ok"].exists)
+        
+        alertDialog.buttons["Ok"].tap()
 
         let activityIndicatorView = app.activityIndicators["In progress"]
                 
-        XCTAssertFalse(activityIndicatorView.exists)
+        XCTAssertFalse(activityIndicatorView.exists) // should not exist
+        
+        
+        
         
     }
     
-    func test_something() {
-        
-        let app = XCUIApplication()
-        app.textFields["Username"].tap()
-        app.secureTextFields["Password"].tap()
-        app/*@START_MENU_TOKEN@*/.staticTexts["Login"]/*[[".buttons[\"Login\"].staticTexts[\"Login\"]",".staticTexts[\"Login\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.alerts["Missing Credentials"].scrollViews.otherElements.buttons["Ok"].tap()
-                
-    }
+//    func test_something() {
+//
+//        let app = XCUIApplication()
+//        app.textFields["Username"].tap()
+//        app.secureTextFields["Password"].tap()
+//        app/*@START_MENU_TOKEN@*/.staticTexts["Login"]/*[[".buttons[\"Login\"].staticTexts[\"Login\"]",".staticTexts[\"Login\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//        app.alerts["Missing Credentials"].scrollViews.otherElements.buttons["Ok"].tap()
+//    }
     
     func testInvalidLogin_missingCredentialsAlertIsShown() {
         
         let app = XCUIApplication()
         app.launch()
         
-        
         app.navigationBars["Mockify Music"].buttons["Profile"].tap()
         
-        app.textFields["Username"].tap()
+//        app.textFields["Username"].tap()
 //        app.secureTextFields["Password"].tap()
 //        app/*@START_MENU_TOKEN@*/.buttons["Login"].staticTexts["Login"]/*[[".buttons[\"Login\"].staticTexts[\"Login\"]",".staticTexts[\"Login\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/.tap()
-        app.buttons["Login"].tap()
-//        app.alerts["Invalid Credentials"].scrollViews.otherElements.buttons["Ok"].tap()
         
+        // both of them works fine.
+//        app.buttons["Login"].tap() // not working
+//        app.buttons["Login"].tap() // not working
         
+        app/*@START_MENU_TOKEN@*/.staticTexts["Login"]/*[[".buttons[\"Login\"].staticTexts[\"Login\"]",".staticTexts[\"Login\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app/*@START_MENU_TOKEN@*/.staticTexts["Login"]/*[[".buttons[\"Login\"].staticTexts[\"Login\"]",".staticTexts[\"Login\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         
-//        let app = XCUIApplication()
-//        app/*@START_MENU_TOKEN@*/.staticTexts["Login"]/*[[".buttons[\"Login\"].staticTexts[\"Login\"]",".staticTexts[\"Login\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-//        let alertDialog = app.alerts["Missing Credentials"].scrollViews.otherElements.buttons["Ok"].tap()
         
         let alertDialog = app.alerts["Missing Credentials"]
+        
         XCTAssertTrue(alertDialog.exists)
         
         alertDialog.buttons["Ok"].tap()
@@ -127,7 +127,7 @@ class UITestingTutorialUITests: XCTestCase {
         
         expectation(for: NSPredicate(format: "exists == 1"), evaluatedWith: downloadsCell, handler: nil)
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 7, handler: nil)
         
         XCTAssertTrue(downloadsCell.exists)
         

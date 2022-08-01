@@ -17,6 +17,7 @@ class TableViewController: UITableViewController {
         self.title = "Mockify Music"
         
         downloadsCell.isHidden = true
+//        UserDefaults.standard.set(false, forKey: "loggedIn")
     }
     
     override func viewWillAppear(_ animated: Bool) {

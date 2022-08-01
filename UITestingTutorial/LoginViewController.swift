@@ -26,33 +26,42 @@ class LoginViewController: UIViewController {
         navigationBar.delegate = self
         statusLabel.text = ""
         loadingActivity.hidesWhenStopped = true
+
     }
     
     @IBAction func login(_ sender: Any) {
         
         statusLabel.text = "Logging In"
-        
-//        loadingActivity.startAnimating()
+        loadingActivity.startAnimating()
         
         guard let userName = userName.text, !userName.isEmpty,
             let password = password.text, !password.isEmpty else {
+//            self.loadingActivity.stopAnimating()
                 presentAlert(with: "Missing Credentials", message: "Missing User Name Or Password")
+            
+            self.loadingActivity.stopAnimating()
                 return
         }
         
         guard expectedUserName == userName else {
+            
             presentAlert(with: "Invalid Credentials", message: "Invalid User Name")
+            self.loadingActivity.stopAnimating()
             return
         }
         
         guard expectedPassword == password else {
+           
+
+            
             presentAlert(with: "Invalid Credentials", message: "Invalid Password")
+            self.loadingActivity.stopAnimating()
             return
         }
         
         UserDefaults.standard.set(true, forKey: "loggedIn")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.statusLabel.text = "Logged In"
             self.loadingActivity.stopAnimating()
             self.dismiss(animated: true, completion: nil)
@@ -61,8 +70,7 @@ class LoginViewController: UIViewController {
     
     private func presentAlert(with title: String, message: String) {
         
-//        loadingActivity.startAnimating()
-        loadingActivity.stopAnimating()
+        loadingActivity.startAnimating()
         
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
  
